@@ -11,6 +11,11 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "isolatedModules": true,
+    "paths": {
+      "ngx-seo": [
+        "./dist/ngx-seo"
+      ]
+    },
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
