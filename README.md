@@ -20,8 +20,6 @@
 
 - SEO auditing function to check for essential tags
 
-- Utilities like Title Case conversion
-
 ## Installation
 
 ```
