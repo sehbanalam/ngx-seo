@@ -10,7 +10,7 @@ import { SEOService } from 'ngx-seo';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  title = 'seo-test-app';
+  title = 'NGX-SEO Testing';
 
   constructor(private seoService: SEOService) {}
 
@@ -28,12 +28,27 @@ export class AppComponent implements OnInit {
 
     this.seoService.setTwitterTags({
       title: 'NGX-SEO',
-      creator:"Sehban Alam",
+      creator: 'Sehban Alam',
       description: 'This is the home page description.',
       image: 'https://example.com/image.jpg',
       cardType: 'summary_large_image',
     });
 
-    
+    this.seoService.setCanonicalUrl('https://example.com/');
+
+    this.seoService.setRobotsTag('ABC');
+
+    this.seoService.setHreflang('NL', 'https://example.com/');
+
+    this.seoService.setStructuredData({ Key: 'Value' });
+
+    let breadcrumbs = [
+      { name: 'Breadcrumb Name 1', url: 'https://example.com/' },
+      { name: 'Breadcrumb Name 2', url: 'https://example.com/' },
+    ];
+
+    this.seoService.setBreadcrumbSchema(breadcrumbs);
+
+    this.seoService.auditSEO();
   }
 }

@@ -1,4 +1,5 @@
-import { Injectable, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 interface MetaTags {
@@ -18,7 +19,7 @@ export class SEOService {
   constructor(
     private meta: Meta,
     private title: Title,
-    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document,
   ) {}
 
   // General Meta Tags and Open Graph
@@ -64,7 +65,6 @@ export class SEOService {
     creator: string;
     description: string;
     image: string;
-    
   }): void {
     this.meta.updateTag({ name: 'twitter:card', content: tags?.cardType });
     this.meta.updateTag({ name: 'twitter:title', content: tags?.title });
@@ -78,10 +78,10 @@ export class SEOService {
 
   // Canonical URL
   setCanonicalUrl(url: string): void {
-    const link: HTMLLinkElement = this.renderer.createElement('link');
+    const link: HTMLLinkElement = this.document.createElement('link');
     link.setAttribute('rel', 'canonical');
     link.setAttribute('href', url);
-    this.renderer.appendChild(document.head, link);
+    this.document.head.appendChild(link);
   }
 
   // Robots Meta Tag
@@ -91,19 +91,19 @@ export class SEOService {
 
   // Hreflang Tags for International SEO
   setHreflang(locale: string, url: string): void {
-    const link: HTMLLinkElement = this.renderer.createElement('link');
+    const link: HTMLLinkElement = this.document.createElement('link');
     link.setAttribute('rel', 'alternate');
     link.setAttribute('hreflang', locale);
     link.setAttribute('href', url);
-    this.renderer.appendChild(document.head, link);
+    this.document.head.appendChild(link);
   }
 
   // Structured Data Markup (Schema.org)
   setStructuredData(schema: any): void {
-    const script = this.renderer.createElement('script');
+    const script = this.document.createElement('script');
     script.type = 'application/ld+json';
     script.text = JSON.stringify(schema);
-    this.renderer.appendChild(document.head, script);
+    this.document.head.appendChild(script);
   }
 
   // Breadcrumbs JSON-LD Markup
@@ -131,6 +131,8 @@ export class SEOService {
     tags.forEach((tag) => {
       if (!document.querySelector(tag.selector)) {
         console.warn(`Missing essential SEO tag: ${tag.name}`);
+      } else {
+        console.log(`=> SEO Audit - No problems found in: ${tag.name} `);
       }
     });
   }
