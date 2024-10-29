@@ -10,7 +10,8 @@
     "test": "ng test",
     "serve:ssr:seo-test-app": "node dist/seo-test-app/server/server.mjs",
     "run-prettier": "prettier . --write",
-    "serve:ssr:test-app": "node dist/test-app/server/server.mjs"
+    "serve:ssr:test-app": "node dist/test-app/server/server.mjs",
+    "serve:ssr:ngx-seo-helper-demo": "node dist/ngx-seo-helper-demo/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +26,7 @@
     "@angular/router": "^18.2.0",
     "@angular/ssr": "^18.2.10",
     "express": "^4.18.2",
+    "ngx-seo-helper": "file:dist/ngx-seo-helper",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
