@@ -1,6 +1,6 @@
 # ngx-seo
 
-**REQUIREMENTS: Angular 18+ with Server Side Rendering**
+#### **REQUIREMENTS: Angular 18+ with Server Side Rendering**
 
 **`ngx-seo`** is an Angular SEO package for managing meta tags, Open Graph, Twitter cards, structured data, canonical URLs, and more, enhancing the SEO of your Angular applications.
 
