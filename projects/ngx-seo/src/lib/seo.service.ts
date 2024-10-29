@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 interface MetaTags {
@@ -20,6 +20,7 @@ export class SEOService {
     private meta: Meta,
     private title: Title,
     @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   // General Meta Tags and Open Graph
@@ -78,33 +79,59 @@ export class SEOService {
 
   // Canonical URL
   setCanonicalUrl(url: string): void {
-    const link: HTMLLinkElement = this.document.createElement('link');
-    link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', url);
-    this.document.head.appendChild(link);
-  }
+    if (isPlatformBrowser(this.platformId)) {
+      const link: HTMLLinkElement = document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      link.setAttribute('href', url);
 
+      // Remove any existing canonical link to avoid duplicates
+      const existingLink = document.querySelector('link[rel="canonical"]');
+      if (existingLink) {
+        document.head.removeChild(existingLink);
+      }
+
+      document.head.appendChild(link);
+    }
+  }
   // Robots Meta Tag
   setRobotsTag(content: string): void {
     this.meta.updateTag({ name: 'robots', content });
   }
 
-  // Hreflang Tags for International SEO
-  setHreflang(locale: string, url: string): void {
-    const link: HTMLLinkElement = this.document.createElement('link');
+ // Hreflang Tags for International SEO
+ setHreflang(locale: string, url: string): void {
+  if (isPlatformBrowser(this.platformId)) {
+    const link: HTMLLinkElement = document.createElement('link');
     link.setAttribute('rel', 'alternate');
     link.setAttribute('hreflang', locale);
     link.setAttribute('href', url);
-    this.document.head.appendChild(link);
-  }
 
-  // Structured Data Markup (Schema.org)
-  setStructuredData(schema: any): void {
-    const script = this.document.createElement('script');
+    // Remove any existing hreflang tag for the locale to avoid duplicates
+    const existingLink = document.querySelector(`link[rel="alternate"][hreflang="${locale}"]`);
+    if (existingLink) {
+      document.head.removeChild(existingLink);
+    }
+
+    document.head.appendChild(link);
+  }
+}
+
+ // Structured Data Markup (Schema.org)
+ setStructuredData(schema: any): void {
+  if (isPlatformBrowser(this.platformId)) {
+    const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.text = JSON.stringify(schema);
-    this.document.head.appendChild(script);
+
+    // Remove any existing structured data script to avoid duplicates
+    const existingScript = document.querySelector('script[type="application/ld+json"]');
+    if (existingScript) {
+      document.head.removeChild(existingScript);
+    }
+
+    document.head.appendChild(script);
   }
+}
 
   // Breadcrumbs JSON-LD Markup
   setBreadcrumbSchema(breadcrumbs: { name: string; url: string }[]): void {
@@ -121,19 +148,22 @@ export class SEOService {
     this.setStructuredData(schema);
   }
 
-  // Audit SEO - Checks for essential tags
-  auditSEO(): void {
-    const tags = [
-      { name: 'title', selector: 'meta[property="og:title"]' },
-      { name: 'description', selector: 'meta[property="og:description"]' },
-      { name: 'image', selector: 'meta[property="og:image"]' },
-    ];
-    tags.forEach((tag) => {
-      if (!document.querySelector(tag.selector)) {
-        console.warn(`Missing essential SEO tag: ${tag.name}`);
-      } else {
-        console.log(`=> SEO Audit - No problems found in: ${tag.name} `);
+    // Audit SEO - Checks for essential tags
+    auditSEO(): void {
+      if (isPlatformBrowser(this.platformId)) {
+        const tags = [
+          { name: 'title', selector: 'meta[property="og:title"]' },
+          { name: 'description', selector: 'meta[property="og:description"]' },
+          { name: 'image', selector: 'meta[property="og:image"]' },
+        ];
+        
+        tags.forEach((tag) => {
+          if (!document.querySelector(tag.selector)) {
+            console.warn(`Missing essential SEO tag: ${tag.name}`);
+          } else {
+            console.log(`=> SEO Audit - No problems found in: ${tag.name}`);
+          }
+        });
       }
-    });
-  }
+    }
 }
