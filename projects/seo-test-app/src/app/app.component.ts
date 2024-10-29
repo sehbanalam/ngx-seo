@@ -7,22 +7,21 @@ import { SEOService } from 'ngx-seo';
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   title = 'seo-test-app';
 
   constructor(private seoService: SEOService) {}
 
-  ngOnInit(){
-    
+  ngOnInit() {
     this.seoService.updateMetaTags({
       title: 'Sehban - My Angular App',
       description: 'This is the home page description.',
       keywords: 'Angular, SEO, Open Graph',
       author: 'Sehban Alam',
       imageUrl: 'https://example.com/image.jpg',
-      url: 'https://example.com/home'
+      url: 'https://example.com/home',
     });
   }
 }

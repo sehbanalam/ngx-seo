@@ -12,10 +12,14 @@ interface MetaTags {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SEOService {
-  constructor(private meta: Meta, private title: Title, private renderer: Renderer2) {}
+  constructor(
+    private meta: Meta,
+    private title: Title,
+    private renderer: Renderer2,
+  ) {}
 
   // General Meta Tags and Open Graph
   updateMetaTags(tags: MetaTags): void {
@@ -26,7 +30,10 @@ export class SEOService {
 
     if (tags.description) {
       this.meta.updateTag({ name: 'description', content: tags.description });
-      this.meta.updateTag({ property: 'og:description', content: tags.description });
+      this.meta.updateTag({
+        property: 'og:description',
+        content: tags.description,
+      });
     }
 
     if (tags.keywords) {
@@ -51,10 +58,18 @@ export class SEOService {
   }
 
   // Twitter Card Tags
-  setTwitterTags(tags: { title: string; description: string; image: string; cardType: string }): void {
+  setTwitterTags(tags: {
+    title: string;
+    description: string;
+    image: string;
+    cardType: string;
+  }): void {
     this.meta.updateTag({ name: 'twitter:card', content: tags.cardType });
     this.meta.updateTag({ name: 'twitter:title', content: tags.title });
-    this.meta.updateTag({ name: 'twitter:description', content: tags.description });
+    this.meta.updateTag({
+      name: 'twitter:description',
+      content: tags.description,
+    });
     this.meta.updateTag({ name: 'twitter:image', content: tags.image });
   }
 
@@ -91,14 +106,14 @@ export class SEOService {
   // Breadcrumbs JSON-LD Markup
   setBreadcrumbSchema(breadcrumbs: { name: string; url: string }[]): void {
     const schema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": breadcrumbs.map((breadcrumb, index) => ({
-        "@type": "ListItem",
-        "position": index + 1,
-        "name": breadcrumb.name,
-        "item": breadcrumb.url
-      }))
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: breadcrumb.name,
+        item: breadcrumb.url,
+      })),
     };
     this.setStructuredData(schema);
   }
@@ -110,12 +125,10 @@ export class SEOService {
       { name: 'description', selector: 'meta[property="og:description"]' },
       { name: 'image', selector: 'meta[property="og:image"]' },
     ];
-    tags.forEach(tag => {
+    tags.forEach((tag) => {
       if (!document.querySelector(tag.selector)) {
         console.warn(`Missing essential SEO tag: ${tag.name}`);
       }
     });
   }
-
-  
 }

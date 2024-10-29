@@ -4,13 +4,7 @@ import { Component } from '@angular/core';
   selector: 'lib-ngx-seo',
   standalone: true,
   imports: [],
-  template: `
-    <p>
-      ngx-seo works!
-    </p>
-  `,
-  styles: ``
+  template: ``,
+  styles: ``,
 })
-export class NgxSeoComponent {
-
-}
+export class NgxSeoComponent {}

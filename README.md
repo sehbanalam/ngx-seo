@@ -1,15 +1,8 @@
-
 # ngx-seo
-
-  
 
 **`ngx-seo`** is an Angular SEO package for managing meta tags, Open Graph, Twitter cards, structured data, canonical URLs, and more, enhancing the SEO of your Angular applications.
 
-  
-
 ## Features
-
-  
 
 - Update meta tags (title, description, keywords, etc.)
 
@@ -27,9 +20,8 @@
 
 - Utilities like Title Case conversion
 
-  
+## Installation
 
-## Installation 
 ```
 npm install ngx-seo
 ```
@@ -39,7 +31,6 @@ npm install ngx-seo
 ### Step 1: Import `NgxSeoModule` in Your App
 
 Add `NgxSeoModule` to the `imports` array in your main module.
-
 
 ```
 import { NgxSeoModule } from 'ngx-seo';
@@ -56,6 +47,7 @@ export class AppModule {}
 ### Step 2: Inject `SEOService` into Your Component
 
 You can now inject the `SEOService` and use it to manage your page’s SEO settings.
+
 ```
 import { Component, OnInit } from '@angular/core';
 import { SEOService } from 'ngx-seo';
@@ -105,6 +97,7 @@ export class HomeComponent implements OnInit {
   }
 }
 ```
+
 ## API Reference
 
 ### `1. updateMetaTags(tags: MetaTags)`
@@ -113,9 +106,10 @@ Sets common meta tags such as title, description, keywords, and Open Graph tags.
 
 #### Parameters
 
--   `tags`: Object containing properties like `title`, `description`, `keywords`, `author`, `imageUrl`, `url`, and `robots`.
+- `tags`: Object containing properties like `title`, `description`, `keywords`, `author`, `imageUrl`, `url`, and `robots`.
 
 #### Example
+
 ```
 this.seoService.updateMetaTags({
   title: 'Product Page',
@@ -133,9 +127,10 @@ Sets Twitter Card metadata.
 
 #### Parameters
 
--   `tags`: Object containing properties `title`, `description`, `image`, and `cardType`.
+- `tags`: Object containing properties `title`, `description`, `image`, and `cardType`.
 
 #### Example
+
 ```
 this.seoService.setTwitterTags({
   title: 'Product - My Angular App',
@@ -151,7 +146,7 @@ Sets the canonical URL for the page.
 
 #### Parameters
 
--   `url` (optional): The URL to set as canonical. If not provided, the current URL is used.
+- `url` (optional): The URL to set as canonical. If not provided, the current URL is used.
 
 #### Example
 
@@ -165,9 +160,10 @@ Sets the robots meta tag to control indexing and following.
 
 #### Parameters
 
--   `content`: A string like `index,follow` or `noindex,nofollow`.
+- `content`: A string like `index,follow` or `noindex,nofollow`.
 
 #### Example
+
 ```
 this.seoService.setRobotsTag('index,follow');
 ```
@@ -178,10 +174,11 @@ Sets the `hreflang` attribute for internationalization.
 
 #### Parameters
 
--   `locale`: Locale code (e.g., `en`, `es`).
--   `url`: URL corresponding to the specified locale.
+- `locale`: Locale code (e.g., `en`, `es`).
+- `url`: URL corresponding to the specified locale.
 
 #### Example
+
 ```
 this.seoService.setHreflang('es', 'https://example.com/es');
 ```
@@ -192,9 +189,10 @@ Sets structured data using JSON-LD for Schema.org. Useful for enhancing SEO with
 
 #### Parameters
 
--   `schema`: JSON object with structured data schema.
+- `schema`: JSON object with structured data schema.
 
 #### Example
+
 ```
 this.seoService.setStructuredData({
   "@context": "https://schema.org",
@@ -202,17 +200,19 @@ this.seoService.setStructuredData({
   "name": "My Angular App",
   "url": "https://example.com",
   "logo": "https://example.com/logo.png"
-}); 
+});
 ```
+
 ### `7. setBreadcrumbSchema(breadcrumbs: { name: string; url: string }[])`
 
 Adds a Breadcrumb schema for SEO.
 
 #### Parameters
 
--   `breadcrumbs`: Array of objects, each containing a `name` and `url`.
+- `breadcrumbs`: Array of objects, each containing a `name` and `url`.
 
 #### Example
+
 ```
 this.seoService.setBreadcrumbSchema([
   { name: 'Home', url: 'https://example.com' },
@@ -225,6 +225,7 @@ this.seoService.setBreadcrumbSchema([
 Checks the page for essential SEO tags (like title, description, and image) and logs any missing tags.
 
 #### Example
+
 ```
 this.seoService.auditSEO();
 ```
@@ -235,9 +236,10 @@ Utility function to convert a title string to Title Case.
 
 #### Parameters
 
--   `title`: String to format to Title Case.
+- `title`: String to format to Title Case.
 
 #### Example
+
 ```
 const formattedTitle = this.seoService.formatTitleCase('my angular app');
 console.log(formattedTitle); // Output: My Angular App
