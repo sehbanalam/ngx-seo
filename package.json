@@ -1,15 +1,16 @@
 {
-  "name": "ngx-seo",
+  "name": "ngx-seo-helper",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-library": "ng build ngx-seo",
+    "build-library": "ng build ngx-seo-helper",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:seo-test-app": "node dist/seo-test-app/server/server.mjs",
-    "run-prettier": "prettier . --write"
+    "run-prettier": "prettier . --write",
+    "serve:ssr:test-app": "node dist/test-app/server/server.mjs"
   },
   "private": true,
   "dependencies": {

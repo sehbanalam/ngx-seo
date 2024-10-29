@@ -151,7 +151,7 @@ Sets the canonical URL for the page.
 
 #### Parameters
 
-- `url` (optional): The URL to set as canonical. 
+- `url` (optional): The URL to set as canonical.
 
 #### Example
 
