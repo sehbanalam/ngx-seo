@@ -59,10 +59,10 @@ export class SEOService {
   }
 
   // Canonical URL
-  setCanonicalUrl(url?: string): void {
+  setCanonicalUrl(url: string): void {
     const link: HTMLLinkElement = this.renderer.createElement('link');
     link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', url || window.location.href);
+    link.setAttribute('href', url);
     this.renderer.appendChild(document.head, link);
   }
 
