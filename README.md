@@ -71,14 +71,18 @@ export class HomeComponent implements OnInit {
     });
 
     this.seoService.setTwitterTags({
+      cardType: 'summary_large_image',
       title: 'Home - My Angular App',
+      creator: 'Your Name',
       description: 'This is the home page description.',
-      image: 'https://example.com/image.jpg',
-      cardType: 'summary_large_image'
+      image: 'https://example.com/image.jpg'
     });
 
-    this.seoService.setCanonicalUrl();
-    this.seoService.setHreflang('en', 'https://example.com/home');
+    this.seoService.setCanonicalUrl('https://example.com/abc');
+
+    this.seoService.setRobotsTag('noindex');
+
+    this.seoService.setHreflang('en', 'https://example.com/en');
 
     this.seoService.setStructuredData({
       "@context": "https://schema.org",
@@ -127,16 +131,17 @@ Sets Twitter Card metadata.
 
 #### Parameters
 
-- `tags`: Object containing properties `title`, `description`, `image`, and `cardType`.
+- `tags`: Object containing properties `cardType`, `title`, `creator`, `description`, `image`.
 
 #### Example
 
 ```
 this.seoService.setTwitterTags({
+  cardType: 'summary_large_image',
   title: 'Product - My Angular App',
+  creator: 'Your Name',
   description: 'Description for Twitter Card.',
-  image: 'https://example.com/product.jpg',
-  cardType: 'summary_large_image'
+  image: 'https://example.com/product.jpg'
 });
 ```
 
@@ -146,7 +151,7 @@ Sets the canonical URL for the page.
 
 #### Parameters
 
-- `url` (optional): The URL to set as canonical. If not provided, the current URL is used.
+- `url` (optional): The URL to set as canonical. 
 
 #### Example
 
@@ -228,21 +233,6 @@ Checks the page for essential SEO tags (like title, description, and image) and 
 
 ```
 this.seoService.auditSEO();
-```
-
-### `9. formatTitleCase(title: string): string`
-
-Utility function to convert a title string to Title Case.
-
-#### Parameters
-
-- `title`: String to format to Title Case.
-
-#### Example
-
-```
-const formattedTitle = this.seoService.formatTitleCase('my angular app');
-console.log(formattedTitle); // Output: My Angular App
 ```
 
 ## Contributing
