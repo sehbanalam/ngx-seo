@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   constructor(private seoService: SEOService) {}
 
   ngOnInit(){
+    
     this.seoService.updateMetaTags({
       title: 'Sehban - My Angular App',
       description: 'This is the home page description.',
