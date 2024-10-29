@@ -14,14 +14,26 @@ export class AppComponent implements OnInit {
 
   constructor(private seoService: SEOService) {}
 
+  tags = {
+    title: 'NGX-SEO',
+    description: 'This is the home page description.',
+    keywords: 'Angular, SEO, Open Graph',
+    author: 'Sehban Alam',
+    imageUrl: 'https://example.com/image.jpg',
+    url: 'https://example.com/home',
+  };
+
   ngOnInit() {
-    this.seoService.updateMetaTags({
-      title: 'Sehban - My Angular App',
+    this.seoService.updateMetaTags(this.tags);
+
+    this.seoService.setTwitterTags({
+      title: 'NGX-SEO',
+      creator:"Sehban Alam",
       description: 'This is the home page description.',
-      keywords: 'Angular, SEO, Open Graph',
-      author: 'Sehban Alam',
-      imageUrl: 'https://example.com/image.jpg',
-      url: 'https://example.com/home',
+      image: 'https://example.com/image.jpg',
+      cardType: 'summary_large_image',
     });
+
+    
   }
 }

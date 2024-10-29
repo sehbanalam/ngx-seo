@@ -59,13 +59,16 @@ export class SEOService {
 
   // Twitter Card Tags
   setTwitterTags(tags: {
+    cardType: string;
     title: string;
+    creator: string;
     description: string;
     image: string;
-    cardType: string;
+    
   }): void {
-    this.meta.updateTag({ name: 'twitter:card', content: tags.cardType });
-    this.meta.updateTag({ name: 'twitter:title', content: tags.title });
+    this.meta.updateTag({ name: 'twitter:card', content: tags?.cardType });
+    this.meta.updateTag({ name: 'twitter:title', content: tags?.title });
+    this.meta.updateTag({ name: 'twitter:creator', content: tags?.creator });
     this.meta.updateTag({
       name: 'twitter:description',
       content: tags.description,

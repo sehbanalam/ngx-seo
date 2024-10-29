@@ -5,9 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-library": "ng build ngx-seo",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:seo-test-app": "node dist/seo-test-app/server/server.mjs"
+    "serve:ssr:seo-test-app": "node dist/seo-test-app/server/server.mjs",
+    "run-prettier": "prettier . --write"
   },
   "private": true,
   "dependencies": {
